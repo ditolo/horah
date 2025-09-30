@@ -3,9 +3,7 @@ let globalNow = "00:00:00";
 let refTimes = [];
 
 // === Conversión ===
-const timeToSeconds = (h, m, s) => {
-    return parseInt(h) * 3600 + parseInt(m) * 60 + parseInt(s);
-}
+const timeToSeconds = (h, m, s) => parseInt(h) * 3600 + parseInt(m) * 60 + parseInt(s);
 
 const secondsToHMS = (secs) => {
     secs = (secs + 24 * 3600) % (24 * 3600);
@@ -38,6 +36,9 @@ const saveTime = () => {
         m.toString().padStart(2, "0") + ":" +
         s.toString().padStart(2, "0");
     document.getElementById("lastTime").textContent = globalTime;
+
+    // Guardar en localStorage
+    localStorage.setItem("globalTime", globalTime);
 }
 
 // === Diferencia entre ahora y H ===
@@ -60,6 +61,16 @@ const saveAdditionalTime = () => {
         m.toString().padStart(2, "0") + ":" +
         s.toString().padStart(2, "0");
     refTimes.push(ref);
+
+    // Guardar array en localStorage
+    localStorage.setItem("refTimes", JSON.stringify(refTimes));
+}
+
+// === Eliminar referencia ===
+const deleteRef = (index) => {
+    refTimes.splice(index, 1);
+    localStorage.setItem("refTimes", JSON.stringify(refTimes));
+    printTimes();
 }
 
 // === Pintar tabla ===
@@ -80,8 +91,8 @@ const printTimes = () => {
         let plusSecs = Hsecs + refSecs;
         let minusSecs = Hsecs - refSecs;
 
-        let diffPlus = (plusSecs - nowSecs + 24*3600) % (24*3600);
-        let diffMinus = (minusSecs - nowSecs + 24*3600) % (24*3600);
+        let diffPlus = (plusSecs - nowSecs + 24 * 3600) % (24 * 3600);
+        let diffMinus = (minusSecs - nowSecs + 24 * 3600) % (24 * 3600);
 
         let row = document.createElement("tr");
         row.innerHTML = `
@@ -90,20 +101,32 @@ const printTimes = () => {
             <td>${secondsToHMS(diffPlus)}</td>
             <td>${secondsToHMS(minusSecs)}</td>
             <td>${secondsToHMS(diffMinus)}</td>
-            <td><button onclick="deleteRef(${index})">❌</button></td>
+            <td><button class="delete" onclick="deleteRef(${index})">❌</button></td>
         `;
         tbody.appendChild(row);
     });
 }
 
-// === Eliminar referencia por índice ===
-const deleteRef = (index) => {
-    refTimes.splice(index, 1); // elimina la ref en la posición indicada
-    printTimes(); // repinta la tabla
+// === Recuperar datos al cargar la página ===
+window.onload = () => {
+    // Recuperar H
+    const savedH = localStorage.getItem("globalTime");
+    if (savedH) {
+        globalTime = savedH;
+        document.getElementById("lastTime").textContent = globalTime;
+    }
+
+    // Recuperar referencias
+    const savedRefs = localStorage.getItem("refTimes");
+    if (savedRefs) {
+        refTimes = JSON.parse(savedRefs);
+    }
+
+    // Pintar tabla al inicio
+    printTimes();
 }
 
 // === Intervalos ===
 setInterval(updateTime, 1000);
 setInterval(diffTime, 1000);
 setInterval(printTimes, 1000);
-
