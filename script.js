@@ -1,6 +1,7 @@
 let globalTime = "00:00:00";
 let globalNow = "00:00:00";
 let refTimes = [];
+let refSign = "+";
 
 // === Conversión ===
 const timeToSeconds = (h, m, s) => parseInt(h) * 3600 + parseInt(m) * 60 + parseInt(s);
@@ -95,14 +96,22 @@ const printTimes = () => {
         let diffMinus = (minusSecs - nowSecs + 24 * 3600) % (24 * 3600);
 
         let row = document.createElement("tr");
-        row.innerHTML = `
-            <td>${ref}</td>
+        const checkedSign = document.getElementById("sign")
+        if (checkedSign.checked) {
+            row.innerHTML = `
+            <td>+${ref}</td>
             <td>${secondsToHMS(plusSecs)}</td>
             <td>${secondsToHMS(diffPlus)}</td>
+            <td><button class="delete" onclick="deleteRef(${index})">❌</button></td>
+        `;
+        } else {
+            row.innerHTML = `
+            <td>-${ref}</td>
             <td>${secondsToHMS(minusSecs)}</td>
             <td>${secondsToHMS(diffMinus)}</td>
             <td><button class="delete" onclick="deleteRef(${index})">❌</button></td>
         `;
+        }
         tbody.appendChild(row);
     });
 }
