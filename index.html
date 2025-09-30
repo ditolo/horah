@@ -12,7 +12,6 @@
 <body>
     <h2>Hora actual:</h2>
     <p id="time-parent"></p>
-
     <!-- Inputs para H -->
     <div id="toggleContainer">
         <input type="number" id="inputH" min="0" max="23" placeholder="HH">
@@ -20,7 +19,10 @@
         <input type="number" id="inputS" min="0" max="59" placeholder="SS">
         <button onclick="saveTime()">Submit H</button>
     </div>
-
+    <p>Hora H: </p>
+    <p id="lastTime"></p>
+    <h2>Diff to/from H:</h2>
+    <p id="diftime-parent"></p>
     <!-- Inputs para referencias X -->
     <div id="toggleContainer">
         <input type="number" id="refH" min="0" max="23" placeholder="HH">
@@ -28,15 +30,6 @@
         <input type="number" id="refS" min="0" max="59" placeholder="SS">
         <button onclick="saveAdditionalTime()">Submit Ref</button>
     </div>
-
-    <div id="toggleContainer">
-        <p>Hora H: </p>
-        <p id="lastTime"></p>
-    </div>
-
-    <h2>Diferencia entre H y la hora actual:</h2>
-    <p id="diftime-parent"></p>
-
     <h2>Referencias guardadas:</h2>
     <table border="1">
         <thead>
@@ -52,8 +45,5 @@
     </table>
 </body>
 
-<footer>
-    <p>Footer de la página</p>
-</footer>
 
 </html>
