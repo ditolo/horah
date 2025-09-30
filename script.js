@@ -73,15 +73,15 @@ const printTimes = () => {
     let [hn, mn, sn] = globalNow.split(":");
     let nowSecs = timeToSeconds(hn, mn, sn);
 
-    refTimes.forEach(ref => {
+    refTimes.forEach((ref, index) => {
         let [hr, mr, sr] = ref.split(":");
         let refSecs = timeToSeconds(hr, mr, sr);
 
         let plusSecs = Hsecs + refSecs;
         let minusSecs = Hsecs - refSecs;
 
-        let diffPlus = (plusSecs - nowSecs + 24 * 3600) % (24 * 3600);
-        let diffMinus = (minusSecs - nowSecs + 24 * 3600) % (24 * 3600);
+        let diffPlus = (plusSecs - nowSecs + 24*3600) % (24*3600);
+        let diffMinus = (minusSecs - nowSecs + 24*3600) % (24*3600);
 
         let row = document.createElement("tr");
         row.innerHTML = `
@@ -90,9 +90,16 @@ const printTimes = () => {
             <td>${secondsToHMS(diffPlus)}</td>
             <td>${secondsToHMS(minusSecs)}</td>
             <td>${secondsToHMS(diffMinus)}</td>
+            <td><button onclick="deleteRef(${index})">❌</button></td>
         `;
         tbody.appendChild(row);
     });
+}
+
+// === Eliminar referencia por índice ===
+const deleteRef = (index) => {
+    refTimes.splice(index, 1); // elimina la ref en la posición indicada
+    printTimes(); // repinta la tabla
 }
 
 // === Intervalos ===
