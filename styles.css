@@ -1,12 +1,139 @@
-#toggleContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* === Reset básico === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Roboto, sans-serif;
 }
 
+/* === Fondo general === */
 body {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background: linear-gradient(135deg, #7ca9fd, #4a628b);
+    color: #fff;
+    min-height: 100vh;
+    padding: 1rem;
+}
+
+/* === Encabezados === */
+h1,
+h2 {
+    margin: 0.5rem 0;
+    text-align: center;
+}
+
+h1 {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+/* === Contenedores de inputs === */
+#toggleContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0.6rem 0;
+    flex-wrap: wrap;
+}
+
+/* === Inputs numéricos === */
+input[type="number"] {
+    width: 70px;
+    padding: 0.4rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    text-align: center;
+    outline: none;
+    background: #f4f4f4;
+    color: #333;
+    transition: 0.2s;
+}
+
+input[type="number"]:focus {
+    background: #fff;
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
+}
+
+/* === Botones === */
+button {
+    padding: 0.5rem 0.9rem;
+    background: #ff6b6b;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: transform 0.1s, background 0.3s;
+}
+
+button:hover {
+    background: #ff8787;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+/* Botón eliminar */
+button.delete {
+    background: #d63031;
+}
+
+button.delete:hover {
+    background: #e74c3c;
+}
+
+/* === Tabla === */
+table {
+    width: 100%;
+    max-width: 500px;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+thead {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+th,
+td {
+    width: fit-content;
+    padding: 0.2rem;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* === Párrafos de hora === */
+#time-parent,
+#lastTime,
+#diftime-parent {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin: 0.4rem 0;
+}
+
+/* === Footer === */
+footer {
+    margin-top: auto;
+    padding: 1rem;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
 }
