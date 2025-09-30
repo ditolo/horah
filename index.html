@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>Acher</title>
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <h2>Hora actual:</h2>
+    <p id="time-parent"></p>
+
+    <!-- Inputs para H -->
+    <div id="toggleContainer">
+        <input type="number" id="inputH" min="0" max="23" placeholder="HH">
+        <input type="number" id="inputM" min="0" max="59" placeholder="MM">
+        <input type="number" id="inputS" min="0" max="59" placeholder="SS">
+        <button onclick="saveTime()">Submit H</button>
+    </div>
+
+    <!-- Inputs para referencias X -->
+    <div id="toggleContainer">
+        <input type="number" id="refH" min="0" max="23" placeholder="HH">
+        <input type="number" id="refM" min="0" max="59" placeholder="MM">
+        <input type="number" id="refS" min="0" max="59" placeholder="SS">
+        <button onclick="saveAdditionalTime()">Submit Ref</button>
+    </div>
+
+    <div id="toggleContainer">
+        <p>Hora H: </p>
+        <p id="lastTime"></p>
+    </div>
+
+    <h2>Diferencia entre H y la hora actual:</h2>
+    <p id="diftime-parent"></p>
+
+    <h2>Referencias guardadas:</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Referencia (X)</th>
+                <th>H + X</th>
+                <th>Falta para H+X</th>
+                <th>H - X</th>
+                <th>Falta para H-X</th>
+            </tr>
+        </thead>
+        <tbody id="calcTableBody"></tbody>
+    </table>
+</body>
+
+<footer>
+    <p>Footer de la página</p>
+</footer>
+
+</html>
